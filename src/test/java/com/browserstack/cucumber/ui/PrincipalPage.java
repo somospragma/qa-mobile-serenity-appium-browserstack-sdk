@@ -1,4 +1,4 @@
-package com.browserstack.cucumber.pages;
+package com.browserstack.cucumber.ui;
 
 
 import io.appium.java_client.AppiumBy;

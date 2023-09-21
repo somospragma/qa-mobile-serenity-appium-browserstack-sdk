@@ -6,6 +6,13 @@ Feature: BrowserStack Demo
 #    Then the product should be added to cart
 
   @Formulario1_with_autocomplete
-  Scenario: interaction with the first form with autocomplete
+  Scenario Outline: interaction with the first form with autocomplete
     Given the user is in Inputs Screen
+    When fill out the name with the <option> suggest with <letter>
+
+    Examples:
+      | option | letter |
+      | first  | a      |
+#      | first |b|
+#      | first |c|
 
