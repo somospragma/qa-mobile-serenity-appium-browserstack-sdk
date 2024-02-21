@@ -10,6 +10,7 @@
 ### Setup
 * Clone the repo
 * Replace YOUR_USERNAME and YOUR_ACCESS_KEY with your BrowserStack access credentials in browserstack.yml.
+* Replace YOUR_USERNAME and YOUR_ACCESS_KEY in serenity.conf located in test/java/resource/serenity.conf
 * Install dependencies `mvn install`
 * You can setup environment variables for all sample repos (see Notes) or update `serenity.conf` file with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings)
 
@@ -72,9 +73,10 @@ This repository uses the BrowserStack SDK to run tests on BrowserStack. Follow t
 
 ## Notes
 * You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
-* You can export the environment variables for the Username and Access Key of your BrowserStack account
+* You can use environment variables for the Username and Access Key of your BrowserStack account for CLI run
   
   ```
-  export BROWSERSTACK_USERNAME=<browserstack-username> &&
-  export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
+  -Dbrowserstack.userName=<tu_userName> -Dbrowserstack.accessKey=<tu_accessKey>
   ```
+
+
