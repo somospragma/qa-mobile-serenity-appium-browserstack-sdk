@@ -26,6 +26,7 @@
         <maven.failsafe-plugin.version>3.0.0-M7</maven.failsafe-plugin.version>
         <maven.surefire-plugin.version>3.0.0-M7</maven.surefire-plugin.version>
         <maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
+        <max.attempts.rerun.test>2</max.attempts.rerun.test>
     </properties>
 
     <repositories>
@@ -151,10 +152,11 @@
                 </dependencies>
                 <configuration>
                     <includes>
-                        <include>com/browserstack/cucumber/SampleTest.java</include>
+                        <include>com/browserstack/cucumber/runners/${runner}.java</include>
                     </includes>
                     <parallel>classesAndMethods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <rerunFailingTestsCount>${max.attempts.rerun.test}</rerunFailingTestsCount>
                     <argLine>
                         -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                     </argLine>
@@ -212,27 +214,7 @@
                         <version>${maven.failsafe-plugin.version}</version>
                         <configuration>
                             <includes>
-                                <include>com/browserstack/cucumber/SampleTest.java</include>
-                            </includes>
-                            <argLine>
-                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
-                            </argLine>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>sample-local-test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>com/browserstack/cucumber/LocalTest.java</include>
+                                <include>com/browserstack/cucumber/runners/SampleTest.java</include>
                             </includes>
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}

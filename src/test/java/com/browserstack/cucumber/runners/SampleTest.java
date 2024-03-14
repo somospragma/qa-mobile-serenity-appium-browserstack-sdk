@@ -1,4 +1,4 @@
-package com.browserstack.cucumber;
+package com.browserstack.cucumber.runners;
 
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
