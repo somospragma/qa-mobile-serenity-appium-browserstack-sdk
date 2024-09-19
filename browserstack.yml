@@ -1,8 +1,8 @@
 # =============================
 # Set BrowserStack Credentials
 # =============================
-userName: Escribir aqui username
-accessKey: Escribir aqui accessKey
+#userName: #recibida desde comando de ejecución
+#accessKey: #recibida desde comando de ejecución
 
 # ======================
 # BrowserStack Reporting
@@ -25,12 +25,14 @@ framework: serenity
 
 source: serenity:appium-intellij:v1.1.2
 
-app: bs://2424ee18c1318c971621eb66945d9298b7004f63
+#app: #recibida desde comando de ejecución
 appPackage: com.example.material3_show_case
 appActivity: .MainActivity
 
 appiumVersion: 2.0.1
 automationName: UIAutomator2
+#automationName: "XCUITest" # for iOS
+#automationName: "Flutter" # for flutter app (android/iOS)
 
 sessionName: POC integration
 
@@ -44,9 +46,10 @@ platforms:
     deviceName: Samsung Galaxy S22 Ultra
     platformVersion: 12.0
 
-#  - platformName: android
-#    deviceName: Google Pixel 7 Pro
-#    platformVersion: 13.0
+#  - platformName: ios
+#    deviceName: iPhone 15
+#    platformVersion: 17
+
 
 # =======================
 # Parallels per Platform

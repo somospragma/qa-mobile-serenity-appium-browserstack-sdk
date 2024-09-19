@@ -3,11 +3,13 @@ package com.browserstack.cucumber.interactions;
 
 import com.browserstack.cucumber.interactions.builders.DragBuilder;
 import com.browserstack.cucumber.models.DragDirection;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
@@ -16,7 +18,6 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static java.util.logging.Logger.getAnonymousLogger;
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getProxiedDriver;
 
 public class Drag implements Interaction {
 
@@ -35,10 +36,15 @@ public class Drag implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        AndroidDriver driver = getProxiedDriver();
+        AppiumDriver driver = (AppiumDriver) BrowseTheWeb.as(actor).getDriver();
 
-        Point elementLocation = target.resolveFor(actor).getLocation();
-        Point destinationLocation = finalPointDefinition(elementLocation);
+        WebElement element = target.resolveFor(actor).getElement();
+
+        int iniX = element.getLocation().getX() + element.getSize().width/2;
+        int iniY = element.getLocation().getY() + element.getSize().height/2;
+
+        Point elementLocationCenter = new Point(iniX,iniY);
+        Point destinationLocation = finalPointDefinition(elementLocationCenter, driver);
 
         //Type of Pointer Input
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH,"finger");
@@ -47,11 +53,11 @@ public class Drag implements Interaction {
 
         try {
             //Move finger into starting position
-            drag.addAction(finger.createPointerMove(Duration.ofSeconds(0), PointerInput.Origin.viewport(),elementLocation));
+            drag.addAction(finger.createPointerMove(Duration.ofSeconds(0), PointerInput.Origin.viewport(),elementLocationCenter));
             //Finger comes down into contact with screen
             drag.addAction(finger.createPointerDown(0));
             //Finger moves to end position
-            drag.addAction(finger.createPointerMove(Duration.ofMillis(700), PointerInput.Origin.viewport(),destinationLocation));
+            drag.addAction(finger.createPointerMove(Duration.ofMillis(500), PointerInput.Origin.viewport(),destinationLocation));
             //Get up Finger from Srceen
             drag.addAction(finger.createPointerUp(0));
 
@@ -62,9 +68,9 @@ public class Drag implements Interaction {
         }
     }
 
-    private Point finalPointDefinition(Point elementPosition) {
+    private Point finalPointDefinition(Point elementPosition, AppiumDriver driver) {
         Point finalPoint;
-        var driverDimension = getProxiedDriver().manage().window().getSize();
+        var driverDimension = driver.manage().window().getSize();
         switch (direction) {
             case UP:
                 finalPoint = new Point(elementPosition.getX(), 0);

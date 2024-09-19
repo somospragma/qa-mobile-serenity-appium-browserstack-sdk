@@ -3,14 +3,13 @@ package com.browserstack.cucumber.interactions;
 import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
 import java.time.Duration;
 import java.util.List;
-
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getProxiedDriver;
 
 public class TapOnCoordinates implements Interaction {
 
@@ -26,7 +25,7 @@ public class TapOnCoordinates implements Interaction {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        AppiumDriver driver = getProxiedDriver();
+        AppiumDriver driver = (AppiumDriver) BrowseTheWeb.as(actor).getDriver();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence tap = new Sequence(finger,1);
         tap.addAction(finger.createPointerMove(Duration.ofMillis(0),
