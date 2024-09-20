@@ -43,9 +43,6 @@ Integración de Appium, Serenity y BrowserStack SDK.
   <a href="#roadmap">Roadmap</a>
 </p>
 
-![BrowserStack Logo](https://d98b8t1nnulk5.cloudfront.net/production/images/layout/logo-header.png?1469004780)
-
-<img src="https://serenity-bdd.info/wp-content/uploads/elementor/thumbs/serenity-bdd-pac9onzlqv9ebi90cpg4zsqnp28x4trd1adftgkwbq.png" height = "100">
 
 ## Topicos
 
